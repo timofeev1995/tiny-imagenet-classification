@@ -3,14 +3,15 @@ from typing import Dict
 import numpy as np
 import pytorch_lightning as pl
 import torch
+
 from torch.utils.data import DataLoader
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from src.data.dataset import TinyImageNetDataset, collate_fn
 from src.data.utils import compose_augmentations
 from src.metrics import accuracy
 from src.model.utils import get_backbone
 from src.model.classification_model import ClassificationModel
-from src.schedulers import ReduceOnPlateauWithWarmup
 
 
 class ClassifierModule(pl.LightningModule):
@@ -129,14 +130,7 @@ class ClassifierModule(pl.LightningModule):
             lr=self.learning_rate,
             weight_decay=self._hparams['w_decay']
         )
-        lr_scheduler = ReduceOnPlateauWithWarmup(
-            optimizer=optimizer,
-            warmup_steps=self.warmup_steps,
-            factor=self.lr_reduce_factor,
-            patience=self.patience_steps,
-            global_step=self.trainer.global_step
-        )
-
+        lr_scheduler = ReduceLROnPlateau(optimizer, 'min')
         scheduler = {
             'scheduler': lr_scheduler,
             'interval': 'step',

@@ -1,3 +1,4 @@
+import sys
 import argparse
 from pathlib import Path
 from typing import Dict
@@ -5,6 +6,7 @@ from typing import Dict
 import pytorch_lightning as pl
 from pytorch_lightning import loggers
 
+sys.path.append('../')
 from src.pl_module import ClassifierModule
 from src.utils import load_yaml, dump_yaml, get_cur_time_str
 
