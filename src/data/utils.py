@@ -20,7 +20,7 @@ def load_valid_metadata(path: Path) -> pd.DataFrame:
         path / 'val' / 'val_annotations.txt',
         sep='\t',
         header=None,
-        names=['path', 'class', 'c0', 'c1', 'c2', 'c3']
+        names=['path', 'class_id', 'c0', 'c1', 'c2', 'c3']
     )
     meta = meta[['path', 'class_id']]
     meta['path'] = 'val/images/' + meta['path']
