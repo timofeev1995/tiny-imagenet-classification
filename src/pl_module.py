@@ -54,7 +54,7 @@ class ClassifierModule(pl.LightningModule):
         )
         valid_dataset = TinyImageNetDataset(
             path=self.dataset_folder,
-            is_valid=False
+            is_valid=True
         )
         collate_function = collate_fn
         self._train_dataloader = DataLoader(
@@ -133,7 +133,7 @@ class ClassifierModule(pl.LightningModule):
         lr_scheduler = ReduceLROnPlateau(optimizer, 'min')
         scheduler = {
             'scheduler': lr_scheduler,
-            'interval': 'step',
+            'interval': 'epoch',
             'frequency': self.trainer.accumulate_grad_batches,
             'reduce_on_plateau': True,
             'monitor': 'CCELoss/valid'
