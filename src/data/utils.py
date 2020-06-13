@@ -46,7 +46,7 @@ def load_class2id_mapping(path: Path) -> Dict:
 def load_image(path: Union[Path, str]) -> np.ndarray:
     image = Image.open(path).convert("RGB")
     image = np.array(image)
-    image = (image / 255) - _MEAN / _STD
+    image = ((image / 255) - _MEAN) / _STD
     return image
 
 
