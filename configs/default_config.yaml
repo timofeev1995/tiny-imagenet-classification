@@ -2,16 +2,25 @@
 dataset_folder: /Users/egortimofeev/Data/tiny-imagenet-200
 augmentations_p: 0.5
 augmentations:
-  Flip:
+  RandomSizedCrop:
+    min_max_height: [32, 64]
+    height: 64
+    width: 64
     p: 0.5
-  Transpose:
-    p: 0.1
-  IAAAdditiveGaussianNoise:
-    p: 0.3
+  Rotate:
+    limit: [-60, 60]
+    p: 0.5
+  VerticalFlip:
+    p: 0.5
+  HorizontalFlip:
+    p: 0.5
   Blur:
-    blur_limit: 5
-    p: 0.5
-  OpticalDistortion:
+    blur_limit: 3
+    p: 0.3
+  Solarize:
+    p: 0.2
+  GaussNoise:
+    var_limit: 5
     p: 0.3
 
 # Model
