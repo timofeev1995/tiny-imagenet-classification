@@ -130,7 +130,12 @@ class ClassifierModule(pl.LightningModule):
             lr=self.learning_rate,
             weight_decay=self._hparams['w_decay']
         )
-        lr_scheduler = ReduceLROnPlateau(optimizer, 'min')
+        lr_scheduler = ReduceLROnPlateau(
+            optimizer,
+            'min',
+            factor=self._hparams['lr_reduce_factor'],
+            patience=self._hparams['patience_steps']
+        )
         scheduler = {
             'scheduler': lr_scheduler,
             'interval': 'epoch',
