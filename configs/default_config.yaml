@@ -17,8 +17,6 @@ augmentations:
   Blur:
     blur_limit: 3
     p: 0.3
-  Solarize:
-    p: 0.2
   GaussNoise:
     var_limit: 5
     p: 0.3
