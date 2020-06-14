@@ -14,6 +14,9 @@ from src.model.utils import get_backbone
 from src.model.classification_model import ClassificationModel
 
 
+_NUM_CLASSES = 200
+
+
 class ClassifierModule(pl.LightningModule):
     def __init__(self, hparams: Dict):
         super().__init__()
@@ -24,7 +27,7 @@ class ClassifierModule(pl.LightningModule):
         self._use_pretrained = hparams['use_pretrained']
         self._backbone = get_backbone(
             model_name=self._backbone_name,
-            num_classes=200,
+            num_classes=_NUM_CLASSES,
             use_pretrained=self._use_pretrained
         )
 
