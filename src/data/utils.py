@@ -43,6 +43,15 @@ def load_class2id_mapping(path: Path) -> Dict:
     return class2id
 
 
+def load_class_names(path: Path) -> Dict:
+    return pd.read_csv(
+        path / "words.txt",
+        sep='\t',
+        header=None,
+        index_col=0
+    )[1].to_dict()
+
+
 def load_image(path: Union[Path, str]) -> np.ndarray:
     image = Image.open(path).convert("RGB")
     image = np.array(image)
